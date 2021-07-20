@@ -14,14 +14,10 @@ contract Badge {
     address recipient;
     string recipientName;
   }
-  mapping(uint16 => BadgeInfo) private badgesById;
-  event badgeIssued(uint16 id, string issuerName, string recipientName);
+  mapping(uint16 => BadgeInfo) public badgesById;
+  event BadgeIssued(uint16 id, string issuerName, string recipientName);
 
-  constructor() {
-    console.log("Deploying the Badge contract with owner:", msg.sender);
-  }
-
-  function issue(string memory _issuerName, address _recipient, string memory _recipientName) public returns (BadgeInfo memory) {
+  function issue(string memory _issuerName, address _recipient, string memory _recipientName) public {
     badgesById[currentId] = BadgeInfo({
       id: currentId,
       issuer: msg.sender,
@@ -29,11 +25,11 @@ contract Badge {
       recipient: _recipient,
       recipientName: _recipientName
     });
-    emit badgeIssued(badgesById[currentId].id, badgesById[currentId].issuerName, badgesById[currentId].recipientName);
-    return badgesById[currentId++];
-  }
 
-  function getBadge(uint16 _id) public view returns (BadgeInfo memory) {
-    return badgesById[_id];
+    console.log(badgesById[currentId].recipientName);
+
+    emit BadgeIssued(badgesById[currentId].id, badgesById[currentId].issuerName, badgesById[currentId].recipientName);
+
+    currentId++;
   }
 }
