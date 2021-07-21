@@ -1,52 +1,71 @@
 const { expect } = require("chai");
 
-describe("Badge", function () {
-  
-  it("Should emit two badge issued events", async function () {
+describe("Badge contract", function () {
 
-    const accounts = await hre.ethers.getSigners();
-  
-    const Badge = await ethers.getContractFactory("Badge");
-    const badge = await Badge.deploy();
-    await badge.deployed();
-    
-    const badgeInfo = {
+  let owner;
+  let issuer;
+  let recipient;
+  let badgeInfo;
+
+  let Badge;
+  let badge;
+
+  before( async function () {
+
+    // Save account addresses once to use in each test 
+    const accounts = await ethers.getSigners();
+    owner = accounts[0];
+    issuer = accounts[1];
+    recipient = accounts[2];
+
+    // Badge info to use
+    badgeInfo = {
       id: 0,
-      issuer: accounts[0].address,
+      issuer: issuer.address,
       issuerName: "Ivan Illich",
-      recipient: accounts[1].address,
+      recipient: recipient.address,
       recipientName: "Gustavo Esteva"
     };
 
-    await expect(badge.issue(badgeInfo.issuerName, badgeInfo.recipient, badgeInfo.recipientName))
-      .to.emit(badge, "BadgeIssued")
-      .withArgs(badgeInfo.id, badgeInfo.issuerName, badgeInfo.recipientName);
   });
 
-  it("Should return a badge", async function () {
-
-    const accounts = await hre.ethers.getSigners();
-  
-    const Badge = await ethers.getContractFactory("Badge");
-    const badge = await Badge.deploy();
-    await badge.deployed();
+  beforeEach( async function () {
     
-    const badgeInfo = {
-      id: 0,
-      issuer: accounts[0].address,
-      issuerName: "Ivan Illich",
-      recipient: accounts[1].address,
-      recipientName: "Gustavo Esteva"
-    };
+    // Deploy fresh contract before each test
+    Badge = await ethers.getContractFactory("Badge");
+    badge = await Badge.deploy();
+    await badge.deployed();
 
-    await badge.issue(badgeInfo.issuerName, badgeInfo.recipient, badgeInfo.recipientName);
-    await badge.issue(badgeInfo.issuerName, badgeInfo.recipient, badgeInfo.recipientName);
+  });
 
-    const badgeResult = await badge.badgesById(badgeInfo.id);
-    console.log(await badge.badgesById(0));
+  describe("Deployment", function () {
+    it("Should set the right owner", async function () {
+
+      expect(await badge.owner()).to.equal(owner.address);
+        
+    });    
+  });
 
 
-    expect(badgeResult).to.deep.equal(badgeInfo);
+  describe("Issuing", function () {
+    it("Should emit a badge issued event", async function () {
 
+      await expect(badge.issue(badgeInfo.issuerName, badgeInfo.recipient, badgeInfo.recipientName))
+        .to.emit(badge, "BadgeIssued")
+        .withArgs(badgeInfo.id, badgeInfo.issuerName, badgeInfo.recipientName);
+
+    });
+
+    it("Should return a badge", async function () {
+
+      await badge.issue(badgeInfo.issuerName, badgeInfo.recipient, badgeInfo.recipientName);
+
+      const badgeResult = await badge.badgesById(badgeInfo.id);
+      // const recipientResult = await badge.recipientById(badgeInfo.id);
+      console.log(badgeResult);
+
+      expect(badgeResult).to.deep.equal(badgeInfo);
+
+    });
   });
 });

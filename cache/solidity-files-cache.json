@@ -44,8 +44,8 @@
       ]
     },
     "/home/wp/workspace/src/github.com/luishporras/web3-server/contracts/Badge.sol": {
-      "lastModificationDate": 1626195680738,
-      "contentHash": "6d3b657f7a2c5ecd82093dfbc49c51fa",
+      "lastModificationDate": 1626867195469,
+      "contentHash": "123449f55b7f94b746badf982bf99dd1",
       "sourceName": "contracts/Badge.sol",
       "solcConfig": {
         "version": "0.8.4",
