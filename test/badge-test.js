@@ -61,7 +61,6 @@ describe("Badge contract", function () {
       await badge.issue(badgeInfo.issuerName, badgeInfo.recipient, badgeInfo.recipientName);
 
       const badgeResult = await badge.badgesById(badgeInfo.id);
-      // const recipientResult = await badge.recipientById(badgeInfo.id);
       console.log(badgeResult);
 
       expect(badgeResult).to.deep.equal(badgeInfo);

@@ -15,7 +15,6 @@ contract Badge {
     string recipientName;
   }
   mapping(uint16 => BadgeInfo) public badgesById;
-  mapping(uint16 => string) public recipientById;
   event BadgeIssued(uint16 id, string issuerName, string recipientName);
 
   function issue(string memory _issuerName, address _recipient, string memory _recipientName) public {
@@ -26,7 +25,6 @@ contract Badge {
       recipient: _recipient,
       recipientName: _recipientName
     });
-    recipientById[currentId] = _recipientName;
 
     emit BadgeIssued(badgesById[currentId].id, badgesById[currentId].issuerName, badgesById[currentId].recipientName);
 
