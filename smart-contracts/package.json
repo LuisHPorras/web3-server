@@ -22,10 +22,11 @@
   },
   "homepage": "https://github.com/LuisHPorras/web3-server#readme",
   "dependencies": {
+    "dotenv": "^10.0.0",
     "hardhat": "^2.4.3"
   },
   "devDependencies": {
-    "@nomiclabs/hardhat-ethers": "^2.0.2",
+    "@nomiclabs/hardhat-ethers": "npm:hardhat-deploy-ethers@^0.3.0-beta.10",
     "@nomiclabs/hardhat-waffle": "^2.0.1",
     "chai": "^4.3.4",
     "ethereum-waffle": "^3.4.0",
