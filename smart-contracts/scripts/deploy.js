@@ -21,12 +21,6 @@ async function main() {
 
   console.log("Badge.sol deployed to:", badge.address);
 
-  const Test = await hre.ethers.getContractFactory("Test");
-  const test = await Test.deploy();
-
-  await test.deployed();
-
-  console.log("Test.sol deployed to:", test.address);
 }
 
 // We recommend this pattern to be able to use async/await everywhere

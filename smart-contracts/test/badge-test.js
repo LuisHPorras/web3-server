@@ -9,6 +9,7 @@ describe("Badge contract", function () {
 
   let Badge;
   let badge;
+  let badgeIssuerInstance;
 
   before( async function () {
 
@@ -36,12 +37,15 @@ describe("Badge contract", function () {
     badge = await Badge.deploy();
     await badge.deployed();
 
+    // Conect to issuer account
+    badgeIssuerInstance = await badge.connect(issuer);
+
   });
 
   describe("Deployment", function () {
     it("Should set the right owner", async function () {
 
-      expect(await badge.owner()).to.equal(owner.address);
+      expect(await badgeIssuerInstance.owner()).to.equal(owner.address);
         
     });    
   });
@@ -50,20 +54,23 @@ describe("Badge contract", function () {
   describe("Issuing", function () {
     it("Should emit a badge issued event", async function () {
 
-      await expect(badge.issue(badgeInfo.issuerName, badgeInfo.recipient, badgeInfo.recipientName))
-        .to.emit(badge, "BadgeIssued")
+      await expect(badgeIssuerInstance.issue(badgeInfo.issuerName, badgeInfo.recipient, badgeInfo.recipientName))
+        .to.emit(badgeIssuerInstance, "BadgeIssued")
         .withArgs(badgeInfo.id, badgeInfo.issuerName, badgeInfo.recipientName);
 
     });
 
     it("Should return a badge", async function () {
 
-      await badge.issue(badgeInfo.issuerName, badgeInfo.recipient, badgeInfo.recipientName);
+      await badgeIssuerInstance.issue(badgeInfo.issuerName, badgeInfo.recipient, badgeInfo.recipientName);
 
-      const badgeResult = await badge.badgesById(badgeInfo.id);
-      console.log(badgeResult);
-
-      expect(badgeResult).to.deep.equal(badgeInfo);
+      const badgeResult = await badgeIssuerInstance.badgesById(badgeInfo.id);
+      
+      expect(badgeResult.id).to.equal(badgeInfo.id);
+      expect(badgeResult.issuer).to.equal(badgeInfo.issuer);
+      expect(badgeResult.issuerName).to.equal(badgeInfo.issuerName);
+      expect(badgeResult.recipient).to.equal(badgeInfo.recipient);
+      expect(badgeResult.recipientName).to.equal(badgeInfo.recipientName);
 
     });
   });
