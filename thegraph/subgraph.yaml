@@ -1,0 +1,24 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: Badge
+    network: rinkeby
+    source:
+      address: "0xF0ea18BCd45128eF244F97579921827a4E881E12"
+      abi: Badge
+      startBlock: 8982168
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Badge
+      abis:
+        - name: Badge
+          file: ./abis/Badge.json
+      eventHandlers:
+        - event: BadgeIssued(uint16,string,string)
+          handler: handleBadgeIssued
+      file: ./src/mapping.ts

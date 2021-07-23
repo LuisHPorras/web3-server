@@ -1,0 +1,58 @@
+[
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint16",
+        "name": "id",
+        "type": "uint16"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "issuerName",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "recipientName",
+        "type": "string"
+      }
+    ],
+    "name": "BadgeIssued",
+    "type": "event"
+  },
+  {
+    "inputs": [{ "internalType": "uint16", "name": "", "type": "uint16" }],
+    "name": "badgesById",
+    "outputs": [
+      { "internalType": "uint16", "name": "id", "type": "uint16" },
+      { "internalType": "address", "name": "issuer", "type": "address" },
+      { "internalType": "string", "name": "issuerName", "type": "string" },
+      { "internalType": "address", "name": "recipient", "type": "address" },
+      { "internalType": "string", "name": "recipientName", "type": "string" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "string", "name": "_issuerName", "type": "string" },
+      { "internalType": "address", "name": "_recipient", "type": "address" },
+      { "internalType": "string", "name": "_recipientName", "type": "string" }
+    ],
+    "name": "issue",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "owner",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]
