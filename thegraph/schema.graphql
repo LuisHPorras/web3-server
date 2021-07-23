@@ -1,0 +1,5 @@
+type Badge @entity {
+  id: ID!
+  issuerName: String!
+  recipientName: String!
+}
