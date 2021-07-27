@@ -2,61 +2,39 @@ import { PrismaClient, Prisma } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
-const userData: Prisma.UserCreateInput[] = [
+const date = new Date().toString()
+
+const badgeData: Prisma.BadgeCreateInput[] = [
   {
-    name: 'Alice',
-    email: 'alice@prisma.io',
-    posts: {
-      create: [
-        {
-          title: 'Join the Prisma Slack',
-          content: 'https://slack.prisma.io',
-          published: true,
-        },
-      ],
-    },
+    id: 0,
+    issuerName: "Er Papito",
+    recipientName: "Er Hijito",
+    area: "La programació",
+    issueDate: new Date()
   },
   {
-    name: 'Nilu',
-    email: 'nilu@prisma.io',
-    posts: {
-      create: [
-        {
-          title: 'Follow Prisma on Twitter',
-          content: 'https://www.twitter.com/prisma',
-          published: true,
-          viewCount: 42,
-        },
-      ],
-    },
+    id: 1,
+    issuerName: "Er Otro",
+    recipientName: "Er Otrito",
+    area: "La vida",
+    issueDate: new Date()
   },
   {
-    name: 'Mahmoud',
-    email: 'mahmoud@prisma.io',
-    posts: {
-      create: [
-        {
-          title: 'Ask a question about Prisma on GitHub',
-          content: 'https://www.github.com/prisma/prisma/discussions',
-          published: true,
-          viewCount: 128,
-        },
-        {
-          title: 'Prisma on YouTube',
-          content: 'https://pris.ly/youtube',
-        },
-      ],
-    },
+    id: 2,
+    issuerName: "La Mama",
+    recipientName: "Er Hijito",
+    area: "La mimada",
+    issueDate: new Date()
   },
 ]
 
 async function main() {
   console.log(`Start seeding ...`)
-  for (const u of userData) {
-    const user = await prisma.user.create({
-      data: u,
+  for (const b of badgeData) {
+    const badge = await prisma.badge.create({
+      data: b,
     })
-    console.log(`Created user with id: ${user.id}`)
+    console.log(`Created badge with id: ${badge.id}`)
   }
   console.log(`Seeding finished.`)
 }
