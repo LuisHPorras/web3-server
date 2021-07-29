@@ -4,7 +4,7 @@
 
 type Badge {
   area: String
-  id: Int!
+  id: String!
   issueDate: DateTime
   issuerName: String
   recipientName: String
@@ -12,7 +12,7 @@ type Badge {
 
 input BadgeCreateInput {
   area: String
-  id: Int!
+  id: String!
   issueDate: DateTime
   issuerName: String
   recipientName: String
@@ -33,7 +33,7 @@ type Mutation {
 
 type Query {
   allBadges: [Badge!]!
-  badgeById(id: Int): Badge
+  badgeById(id: String): Badge
   feed(orderBy: BadgeOrderByDate, skip: Int, take: Int): [Badge!]!
 }
 

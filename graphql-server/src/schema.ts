@@ -27,7 +27,7 @@ const Query = objectType({
     t.nullable.field('badgeById', {
       type: 'Badge',
       args: {
-        id: intArg(),
+        id: stringArg(),
       },
       resolve: (_parent, args, context: Context) => {
         return context.prisma.badge.findUnique({
@@ -94,7 +94,7 @@ const Mutation = objectType({
             issuerName: args.data.issuerName || '',
             recipientName: args.data.recipientName || '',
             area: args.data.area,
-            issueDate: args.data.issueDate || DateTime,
+            issueDate: args.data.issueDate || new Date(),
           },
         })
       },
@@ -105,7 +105,7 @@ const Mutation = objectType({
 const Badge = objectType({
   name: 'Badge',
   definition(t) {
-    t.nonNull.int('id')
+    t.nonNull.string('id')
     t.string('issuerName')
     t.string('recipientName')
     t.string('area')
@@ -116,7 +116,7 @@ const Badge = objectType({
 const BadgeCreateInput = inputObjectType({
   name: 'BadgeCreateInput',
   definition(t) {
-    t.nonNull.int('id')
+    t.nonNull.string('id')
     t.string('issuerName')
     t.string('recipientName')
     t.string('area')
