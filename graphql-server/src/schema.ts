@@ -53,25 +53,6 @@ const Query = objectType({
         })
       },
     })
-
-
-    // t.nonNull.field('badgesCountByArea', {
-    //   type: 'Badge',
-    //   args: {
-    //     area: stringArg(),
-    //   },
-    //   resolve: (_, args, context: Context) => {
-    //     return context.prisma.badge.count({
-    //       data: {
-    //         id: args.data.id,
-    //         issuerName: args.data.issuerName,
-    //         recipientName: args.data.recipientName,
-    //         area: args.data.area,
-    //         issueDate: DateTime,
-    //       },
-    //     })
-    //   },
-    // })
   },
 })
 
