@@ -1,4 +1,5 @@
 import { PrismaClient, Prisma } from '@prisma/client'
+import { v4 as uuid } from 'uuid';
 
 const prisma = new PrismaClient()
 
@@ -6,24 +7,24 @@ const date = new Date().toString()
 
 const badgeData: Prisma.BadgeCreateInput[] = [
   {
-    id: 0,
-    issuerName: "Er Papito",
-    recipientName: "Er Hijito",
-    area: "La programació",
+    id: uuid(),
+    issuerName: "Juan Pérez",
+    recipientName: "Nestlé Inc.",
+    area: "Diseño gráfico",
     issueDate: new Date()
   },
   {
-    id: 1,
-    issuerName: "Er Otro",
-    recipientName: "Er Otrito",
-    area: "La vida",
+    id: uuid(),
+    issuerName: "Jimena Estevez",
+    recipientName: "Ecologistas en acción",
+    area: "Comunicación",
     issueDate: new Date()
   },
   {
-    id: 2,
-    issuerName: "La Mama",
-    recipientName: "Er Hijito",
-    area: "La mimada",
+    id: uuid(),
+    issuerName: "Red de Redes de Economía Alternativa y Solidaria",
+    recipientName: "Germinando Coop.",
+    area: "Emprendimiento Agroecológico",
     issueDate: new Date()
   },
 ]

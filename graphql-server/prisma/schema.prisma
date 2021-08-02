@@ -8,9 +8,9 @@ datasource db {
 }
 
 model Badge {
-  id            Int     @id
-  issuerName    String  @db.VarChar(200)
-  recipientName String  @db.VarChar(200)
-  area          String? @db.VarChar(50)
+  id            String    @id
+  issuerName    String    @db.VarChar(200)
+  recipientName String    @db.VarChar(200)
+  area          String?   @db.VarChar(50)
   issueDate     DateTime?
 }
