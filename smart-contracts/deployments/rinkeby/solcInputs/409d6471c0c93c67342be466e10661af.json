@@ -1,0 +1,35 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "contracts/Badge.sol": {
+      "content": "// SPDX-License-Identifier: GPL-3.0\npragma solidity ^0.8.0;\n\n// import \"hardhat/console.sol\";\n\ncontract Badge {\n\n  address public owner = msg.sender;\n  uint16 currentId = 0;\n  struct BadgeInfo{\n    uint16 id;\n    address issuer;\n    string issuerName;\n    address recipient;\n    string recipientName;\n  }\n  mapping(uint16 => BadgeInfo) public badgesById;\n  event BadgeIssued(uint16 id, string issuerName, string recipientName);\n\n  function issue(string memory _issuerName, address _recipient, string memory _recipientName) public {\n    badgesById[currentId] = BadgeInfo({\n      id: currentId,\n      issuer: msg.sender,\n      issuerName: _issuerName,\n      recipient: _recipient,\n      recipientName: _recipientName\n    });\n\n    emit BadgeIssued(badgesById[currentId].id, badgesById[currentId].issuerName, badgesById[currentId].recipientName);\n\n    currentId++;\n  }\n\n  function incrementId() public {\n    currentId++;\n  }\n}\n"
+    }
+  },
+  "settings": {
+    "optimizer": {
+      "enabled": false,
+      "runs": 200
+    },
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.bytecode",
+          "evm.deployedBytecode",
+          "evm.methodIdentifiers",
+          "metadata",
+          "devdoc",
+          "userdoc",
+          "storageLayout",
+          "evm.gasEstimates"
+        ],
+        "": [
+          "ast"
+        ]
+      }
+    },
+    "metadata": {
+      "useLiteralContent": true
+    }
+  }
+}

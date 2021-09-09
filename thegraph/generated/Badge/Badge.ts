@@ -23,8 +23,8 @@ export class BadgeIssued__Params {
     this._event = event;
   }
 
-  get id(): i32 {
-    return this._event.parameters[0].value.toI32();
+  get id(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
   }
 
   get issuerName(): string {
@@ -37,14 +37,14 @@ export class BadgeIssued__Params {
 }
 
 export class Badge__badgesByIdResult {
-  value0: i32;
+  value0: BigInt;
   value1: Address;
   value2: string;
   value3: Address;
   value4: string;
 
   constructor(
-    value0: i32,
+    value0: BigInt,
     value1: Address,
     value2: string,
     value3: Address,
@@ -59,10 +59,7 @@ export class Badge__badgesByIdResult {
 
   toMap(): TypedMap<string, ethereum.Value> {
     let map = new TypedMap<string, ethereum.Value>();
-    map.set(
-      "value0",
-      ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(this.value0))
-    );
+    map.set("value0", ethereum.Value.fromUnsignedBigInt(this.value0));
     map.set("value1", ethereum.Value.fromAddress(this.value1));
     map.set("value2", ethereum.Value.fromString(this.value2));
     map.set("value3", ethereum.Value.fromAddress(this.value3));
@@ -76,15 +73,15 @@ export class Badge extends ethereum.SmartContract {
     return new Badge("Badge", address);
   }
 
-  badgesById(param0: i32): Badge__badgesByIdResult {
+  badgesById(param0: BigInt): Badge__badgesByIdResult {
     let result = super.call(
       "badgesById",
-      "badgesById(uint16):(uint16,address,string,address,string)",
-      [ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(param0))]
+      "badgesById(uint256):(uint256,address,string,address,string)",
+      [ethereum.Value.fromUnsignedBigInt(param0)]
     );
 
     return new Badge__badgesByIdResult(
-      result[0].toI32(),
+      result[0].toBigInt(),
       result[1].toAddress(),
       result[2].toString(),
       result[3].toAddress(),
@@ -92,11 +89,11 @@ export class Badge extends ethereum.SmartContract {
     );
   }
 
-  try_badgesById(param0: i32): ethereum.CallResult<Badge__badgesByIdResult> {
+  try_badgesById(param0: BigInt): ethereum.CallResult<Badge__badgesByIdResult> {
     let result = super.tryCall(
       "badgesById",
-      "badgesById(uint16):(uint16,address,string,address,string)",
-      [ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(param0))]
+      "badgesById(uint256):(uint256,address,string,address,string)",
+      [ethereum.Value.fromUnsignedBigInt(param0)]
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -104,7 +101,7 @@ export class Badge extends ethereum.SmartContract {
     let value = result.value;
     return ethereum.CallResult.fromValue(
       new Badge__badgesByIdResult(
-        value[0].toI32(),
+        value[0].toBigInt(),
         value[1].toAddress(),
         value[2].toString(),
         value[3].toAddress(),

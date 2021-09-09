@@ -6,9 +6,9 @@ dataSources:
     name: Badge
     network: rinkeby
     source:
-      address: "0xF0ea18BCd45128eF244F97579921827a4E881E12"
+      address: "0xf772617a46D7a21bEA2a2B9D59A6d624A2013f40"
       abi: Badge
-      startBlock: 8982168
+      startBlock: 9256595
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -19,6 +19,6 @@ dataSources:
         - name: Badge
           file: ./abis/Badge.json
       eventHandlers:
-        - event: BadgeIssued(uint16,string,string)
+        - event: BadgeIssued(uint256,string,string)
           handler: handleBadgeIssued
       file: ./src/mapping.ts

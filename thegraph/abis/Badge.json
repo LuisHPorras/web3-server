@@ -4,9 +4,9 @@
     "inputs": [
       {
         "indexed": false,
-        "internalType": "uint16",
+        "internalType": "uint256",
         "name": "id",
-        "type": "uint16"
+        "type": "uint256"
       },
       {
         "indexed": false,
@@ -25,23 +25,61 @@
     "type": "event"
   },
   {
-    "inputs": [{ "internalType": "uint16", "name": "", "type": "uint16" }],
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "name": "badgesById",
     "outputs": [
-      { "internalType": "uint16", "name": "id", "type": "uint16" },
-      { "internalType": "address", "name": "issuer", "type": "address" },
-      { "internalType": "string", "name": "issuerName", "type": "string" },
-      { "internalType": "address", "name": "recipient", "type": "address" },
-      { "internalType": "string", "name": "recipientName", "type": "string" }
+      {
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "issuer",
+        "type": "address"
+      },
+      {
+        "internalType": "string",
+        "name": "issuerName",
+        "type": "string"
+      },
+      {
+        "internalType": "address",
+        "name": "recipient",
+        "type": "address"
+      },
+      {
+        "internalType": "string",
+        "name": "recipientName",
+        "type": "string"
+      }
     ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      { "internalType": "string", "name": "_issuerName", "type": "string" },
-      { "internalType": "address", "name": "_recipient", "type": "address" },
-      { "internalType": "string", "name": "_recipientName", "type": "string" }
+      {
+        "internalType": "string",
+        "name": "_issuerName",
+        "type": "string"
+      },
+      {
+        "internalType": "address",
+        "name": "_recipient",
+        "type": "address"
+      },
+      {
+        "internalType": "string",
+        "name": "_recipientName",
+        "type": "string"
+      }
     ],
     "name": "issue",
     "outputs": [],
@@ -51,7 +89,13 @@
   {
     "inputs": [],
     "name": "owner",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   }
